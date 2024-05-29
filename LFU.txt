@@ -1,0 +1,99 @@
+LFU PAGE REPLACEMENT ALGORITHM
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class LFUPageFaults {
+
+/* Counts no. of page faults */
+static int PageFaults(int n, int c, int[] pages)
+{
+
+// Initialise count to 0
+int count = 0;
+
+// To store elements in memory of size c
+List<int> v = new List<int>();
+
+// To store frequency of pages
+Dictionary<int, int> mp
+= new Dictionary<int, int>();
+
+for (int i = 0; i <= n - 1; i++) {
+
+// Find if element is present in memory or not
+int idx = v.IndexOf(pages[i]);
+
+// If element is not present
+if (idx == -1) {
+// If memory is full
+if (v.Count == c) {
+// Decrease the frequency
+int leastFreqPage = v[0];
+mp[leastFreqPage]
+= mp[leastFreqPage] - 1;
+
+// Remove the first element as
+// It is least frequently used
+v.RemoveAt(0);
+}
+
+// Add the element at the end of memory
+v.Add(pages[i]);
+
+// Increase its frequency
+mp[pages[i]]
+= mp.GetValueOrDefault(pages[i], 0) + 1;
+// Increment the count
+
+count++;
+}
+else {
+// If element is present
+// Remove the element
+// And add it at the end
+// Increase its frequency
+int page = v[idx];
+v.RemoveAt(idx);
+v.Add(page);
+mp[page] = mp[page] + 1;
+}
+// Compare frequency with other pages
+// starting from the 2nd last page
+int k = v.Count - 2;
+
+// Sort the pages based on their frequency
+// And time at which they arrive
+// if frequency is same
+// then, the page arriving first must be placed
+// first
+while (k >= 0 && mp[v[k]] > mp[v[k + 1]]) {
+int temp = v[k];
+v[k] = v[k + 1];
+
+v[k + 1] = temp;
+
+k--;
+}
+}
+
+// Return total page faults
+return count;
+}
+
+/* Driver program to test pageFaults function*/
+static void Main(string[] args)
+{
+int[] pages = { 1, 2, 3, 4, 2, 1, 5 };
+int n = 7, c = 3;
+
+Console.WriteLine("Page Faults = "
+
++ PageFaults(n, c, pages));
+
+Console.WriteLine("Page Hits = "
+
++ (n - PageFaults(n, c, pages)));
+
+}
+}

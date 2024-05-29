@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+int g = 0; // Let us create a global variable to change it in threads
+void *myThreadFun(void *vargp) // The function to be executed by all threads
+{
+int *myid = (int *)vargp; // Store the value argument passed to this thread
+
+static int s = 0; // Let us create a static variable to observe its changes
+++s; // Change static and global variables
+++g;
+printf("Thread ID: %d, Static: %d, Global: %d\n", *myid, ++s, ++g); // Print the argument,
+static and global variables
+}
+int main()
+{ int i;
+pthread_t tid
+// Let us create three threads
+for (i = 0; i < 3; i++)
+pthread_create(&tid, NULL, myThreadFun, (void *)&tid);
+pthread_exit(NULL);
+return 0;
+}

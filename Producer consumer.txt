@@ -1,0 +1,30 @@
+Initialization
+Mutex mutex; // Used to provide mutual exclusion for critical section
+Semaphore empty = N; // Number of empty slots in buffer
+Semaphore full = 0 // Number of slots filled
+int in = 0; //index at which producer will put the next data
+int out = 0; // index from which the consumer will consume next data
+int buffer[N];
+Producer Code
+while(True) {
+// produce an item
+wait(empty); // wait/sleep when there are no empty slots
+wait(mutex);
+buffer[in] = item
+in = (in+1)%buffersize;
+signal(mutex);
+signal(full); // Signal/wake to consumer that buffer has some
+consume now
+}
+Consumer Code
+while(True) {
+wait(full); // wait/sleep when
+there are no full slots
+wait(mutex);
+item = buffer[out];
+out = (out+1)%buffersize;
+signal(mutex);
+signal(empty); // Signal/wake the producer that buffer
+slots are emptied and they can produce more
+//consumer the item
+}

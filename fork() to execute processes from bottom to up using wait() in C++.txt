@@ -1,0 +1,28 @@
+#include <iostream>
+#include <sys/wait.h>
+#include <unistd.h>
+using namespace std;
+int main() {
+pid_t id1 = fork(); //make 4 process using two consecutive fork. The main
+process, two children and one grand child
+pid_t id2 = fork();
+if (id1 > 0 && id2 > 0) { //when both ids are non zero, then it is parent
+process
+wait(NULL);
+
+wait(NULL);
+cout << "Ending of parent process" << endl;
+}else if (id1 == 0 && id2 > 0) { //When first id is 0, then it is first
+child
+sleep(2); //wait 2 seconds to execute second child first
+wait(NULL);
+cout << "Ending of First Child" << endl;
+}else if (id1 > 0 && id2 == 0) { //When second id is 0, then it is second
+child
+sleep(1); //wait 2 seconds
+cout << "Ending of Second child process" << endl;
+}else {
+cout << "Ending of grand child" << endl;
+}
+return 0;
+}

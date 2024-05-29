@@ -1,0 +1,38 @@
+#include &lt;stdio.h&gt;
+#include<unistd.h>
+#include <string.h>
+
+int main() {
+int pipeAk[2];
+int returnstatus;
+int pid;
+
+char writemessage[2][20] = {"Annas", "Khalid"};
+char readmessage[20];
+
+returnstatus = pipe(pipeAk);
+
+if (returnstatus == -1) {
+printf("Unable to create pipe");
+return 1;
+}
+
+pid = fork();
+
+if (pid == 0) {
+read(pipeAk[0], readmessage, sizeof(readmessage));
+printf("Child Process Reading from Pipe Message 1 is %s\n",readmessage);
+
+memset(readmessage, 0, sizeof(readmessage)); 
+read(pipeAk[0], readmessage, sizeof(readmessage));
+printf("Child Process Reading from Pipe Message 2 is %s\n",readmessage);
+} else {
+printf("Parent Process writing to Pipe Message 1 is %s\n",writemessage[0]);
+write(pipeAk[1], writemessage[0], strlen(writemessage[0]) + 1);
+
+printf("Parent Process writing to Pipe Message 2 is %s\n",writemessage[1]);
+write(pipeAk[1], writemessage[1], strlen(writemessage[1]) + 1);
+}
+
+return 0;
+}

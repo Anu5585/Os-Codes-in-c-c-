@@ -1,0 +1,66 @@
+#include<stdio.h>
+int main()
+{
+int n, i, qt, count=0, temp, sq=0, bt[10], wt[10], tat[10], rem_bt[10];
+float awt=0, atat=0;
+
+printf("Enter number of processes");
+scanf("%d",&n);
+printf("Enter burst time of process");
+for(i=0;i<n;i++)
+{
+
+scanf("%d",&bt[i]);
+rem_bt[i]=bt[i]; // initially assume remain time for any process is equal to it's
+burst time !
+}
+printf("Enter quantum time");
+scanf("%d",&qt);
+while(1)
+{
+for(i=0,count=0;i<n;i++)
+{
+temp=qt;
+if(rem_bt[i]==0)
+{
+count++;
+continue;
+}
+//this below condition checks if the remaining time for any process is less than or
+equal to the time quantum or not and also check if the remaining time is greater
+than 0 or not. if both condition are true that means the process can execute fully
+at one time.
+if(rem_bt[i]>qt)
+rem_bt[i]=rem_bt[i]-qt; //Decrease the burst_time of current process by
+quantum
+else
+if(rem_bt[i]>=0)
+{
+temp=rem_bt[i];
+rem_bt[i]=0; //As the process gets fully executed, make its remaining burst
+time = 0
+}
+sq=sq+temp; // Increase the value of sq i.e. shows
+// how much time a process has been processed
+// Turnaround time = Burst time + Waiting time
+//or
+
+//Turnaround time = Exit time - Arrival time
+tat[i]=sq;
+}
+if(n==count)
+break;
+}
+printf("Process\t Burst time\t WaitingTime\tTurnArroundTime\n");
+for(i=0;i<n;i++)
+{
+wt[i]=tat[i]-bt[i]; //turnaround time-burst time
+awt=awt+wt[i];
+atat=atat+tat[i];
+printf("\n%d\t\t%d\t\t%d\t\t%d\n",i+1,bt[i],wt[i],tat[i]);
+}
+awt=awt/n;
+atat=atat/n;
+printf("\nAverage waiting time=%f\n",awt);
+printf("Average turnaround time=%f\n",atat);
+}

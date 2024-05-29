@@ -1,0 +1,30 @@
+#include <iostream>
+#include <thread>
+#include <cstdlib>
+#include <ctime>
+
+const int NUM_THREADS = 5;
+
+void perform_work(int index) {
+    int sleep_time = 1 + rand() % NUM_THREADS;
+    std::cout << "THREAD " << index << ": Started." << std::endl;
+    std::cout << "THREAD " << index << ": Will be sleeping for " << sleep_time << " seconds." << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(sleep_time));
+    std::cout << "THREAD " << index << ": Ended." << std::endl;
+}
+
+int main() {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    std::thread threads[NUM_THREADS];
+
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        threads[i] = std::thread(perform_work, i);
+    }
+
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        threads[i].join();
+    }
+
+    return 0;
+}

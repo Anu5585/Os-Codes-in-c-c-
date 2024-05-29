@@ -1,0 +1,206 @@
+cat --- for creating and displaying short files
+chmod --- change permissions
+cd --- change directory
+cp --- for copying files
+date --- display date
+echo --- echo argument
+ftp --- connect to a remote machine to download or upload files
+grep --- search file
+head --- display first part of file
+ls --- see what files you have
+lpr --- standard print command
+more --- use to read files
+mkdir --- create directory
+mv --- for moving and renaming files
+ncftp --- especially good for downloading files via anonymous ftp.
+print --- custom print command
+pwd --- find out what directory you are in
+rm --- remove a file
+rmdir --- remove directory
+rsh --- remote shell
+setenv --- set an environment variable
+sort --- sort file
+tail --- display last part of file
+
+
+tar --- create an archive, add or extract files
+telnet --- log in to another machine
+wc --- count characters, words, lines
+
+1. To create a file.
+Syntax: $ cat>filename
+Example: $ cat>ex1
+2. To view the content of the file.
+Syntax: $ cat filename
+Example: $ cat ex1
+3. To append some details with the existing details in the file
+Syntax: $ cat>>filename
+Example: $ cat>>ex1
+4. To concatenate multiple files
+Syntax: $ cat file1 file2 > file3
+Example: $ cat computer compiler>world
+5. To know the list of all files in directory
+Syntax: $ ls
+6. To copy the file to another file
+Syntax: $ cp source destination
+Example: $ cp ex1 ex2
+7. To rename the file
+Syntax: $ mv oldfile newfile
+Example: $ mv ex1 ex3
+8. To delete a file
+Syntax: $ rm filename
+Example: $ rm ex1
+9. To delete all files
+Syntax: $ rm *
+10. To create a directory
+Syntax: $ mkdir dirname
+11. To change the name of the directory
+Syntax: $ cd dirname
+12. To remove the directory
+Syntax: $ rmdir dirname
+
+3
+
+Example: $ rmdir flower
+13. Echo
+i. To display the filename starting with single letter
+Syntax: $ echo?
+ii. To display the filename starting with two letters
+Syntax: $ echo??
+iii. To display the filename starting with the letter f
+Syntax: $ echo f*
+iv. To display the filename ending with letter f.
+Syntax: $ echo *f
+14. Present Working Directory
+i. To display the present working directory
+Syntax: $ pwd
+ii. To clear the screen
+Syntax: $ tput clear
+iii. To calculate the values
+Syntax: $ bc
+iv. Uname: To know your machine name
+-n: Tells machine name in network
+Syntax: $ uname
+–
+n
+
+v. To display the version number of the OS
+Syntax: $ uname
+–
+r
+
+15. Head
+i. To display first 10 lines
+Syntax: $ head filename
+ii. To display first 6 characters
+Syntax: $ head
+
+-6c filename
+iii. To display 5 lines from 2 files
+Syntax: $ head
+
+-5 file1 file2
+16. To display last 10 lines
+Syntax: $ tail filename
+Example: $ tail ex3
+
+4
+
+17. Word Count
+i. To display the number of words in a file
+Syntax: $ wc filename
+Example: $ wc ex1
+ii. To display the number of characters in a file
+
+Syntax: $ wc –c filename-
+Example: $ wc –c ex1
+
+iii. To display the number of lines
+Syntax: $ wc –l filename
+Example: $ wc –l ex3
+18. Line Number
+i. To display number of lines with numbers
+Syntax: $ nl filename
+Example: $ nl ex1
+ii. To increment the line number by 5
+Syntax: $ nl –i5 filename
+Example: $ nl –i5 ex3
+19. Sort
+i. To reverse and sort the content of file
+Syntax: $ sort –r filename
+Example: $ sort –r ex1
+ii. To sort the content of the file
+Syntax: $ sort filename
+Example: $ sort ex1
+iii. To sort and remove the duplicate
+Syntax: $ sort –u filename
+Example: $ sort –u ex1
+General Purpose Utility Commands
+AIM:
+To work with some of the general purpose utility commands in UNIX.
+COMMANDS:
+1. Calendar:
+i. To display the calendar.
+Syntax: $ cal
+ii. To display the previous, current and next month.
+
+5
+
+Syntax: $ cal
+-
+3
+
+iii. To display the current month starting from Sunday.
+Syntax: $ cal
+–
+s
+
+iv. To display the current month starting from Monday.
+Syntax: $ cal
+–
+m
+
+2. Date:
+i. To display system date.
+Syntax: $ date
+Output: Tue Jan 20 10:54:25 IST 2009
+ii. To display month only.
+Syntax: $ date+%m
+Output: 01
+iii. To display month name and month
+Syntax: $date +%h%m
+Output: Jan01
+iv. To display month name
+Syntax: $ date+%h
+Output: Jan
+v. To display the time in hours
+Syntax: $ date+%H
+Output: 10
+vi. To display the time in minutes
+Syntax: $ date+%M
+Output: 53
+vii. To display the time in AM or PM
+Syntax: $ date+%r
+Output: 10: 53:24 AM
+viii. To display date of month
+Syntax: $ date+%d
+Output: 20
+3. WHO
+i. To display the login details
+Syntax: $ who
+Output: root :0 Jan 20 10:51
+cs1010 pts/0 Jan 20 10:51 (172.16.1.72)
+
+ii. To display the login user details
+Syntax: $ who am i
+Output: cs1010
+
+6
+
+iii. To display my login id
+Syntax: $ logname
+Output: cs1010
+4. MAN
+i. It is used to view more details of all the commands
+Syntax: $ man command_name
+Example: $ man date
